@@ -16,4 +16,4 @@ group :gem_build_tools do
 end
 
 gem 'coveralls', require: false
-gem 'celluloid', github: 'celluloid/celluloid', branch: 'master'
+gem 'celluloid', github: 'celluloid/celluloid', branch: '0.17.0-prerelease'
