@@ -2,6 +2,25 @@ require 'rubygems'
 require 'bundler/setup'
 require 'celluloid/io'
 require 'celluloid/rspec'
+
+module CelluloidSpecs
+  # Require a file from Celluloid gem 'spec' location directly
+  def self.require(path)
+    celluloid = Pathname(Gem::Specification.find_by_name('celluloid').full_gem_path)
+    full_path = celluloid + 'spec' + path
+    Kernel.require(full_path.to_s)
+  end
+
+  def self.included_module
+    Celluloid::IO
+  end
+
+  # Timer accuracy enforced by the tests (50ms)
+  TIMER_QUANTUM = 0.05
+end
+
+CelluloidSpecs.require('support/actor_example_class')
+
 require 'coveralls'
 Coveralls.wear!
 
@@ -15,6 +34,7 @@ Celluloid.shutdown_timeout = 1
 RSpec.configure do |config|
   config.filter_run :focus => true
   config.run_all_when_everything_filtered = true
+  config.disable_monkey_patching!
 
   config.before do
     Celluloid.logger = logger

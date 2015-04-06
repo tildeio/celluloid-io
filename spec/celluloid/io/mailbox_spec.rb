@@ -1,5 +1,5 @@
-require 'spec_helper'
+CelluloidSpecs.require('support/shared_examples_for_mailbox')
 
-describe Celluloid::IO::Mailbox do
+RSpec.describe Celluloid::IO::Mailbox do
   it_behaves_like "a Celluloid Mailbox"
 end
