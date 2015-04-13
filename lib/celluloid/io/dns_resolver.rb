@@ -29,7 +29,7 @@ module Celluloid
 
         # The non-blocking secret sauce is here, as this is actually a
         # Celluloid::IO::UDPSocket
-        @socket = UDPSocket.new(@server.family)
+        @socket = ::UDPSocket.new(@server.family)
       end
 
       def resolve(hostname)
